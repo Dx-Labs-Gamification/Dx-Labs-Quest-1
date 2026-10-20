@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DX LABS L1: Calibrating the Thinker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-1: #0c130d;
-    --bg-2: #1c2b1c;
+    --brand: #00422f;
+    --brand-hover: #005a40;
+    --bg-1: #00140e;
+    --bg-2: #002b1f;
     --card-bg: #f1ecdd;
-    --frame: #24361f;
-    --ink-dark: #1f3018;
+    --frame: #00422f;
+    --ink-dark: #00422f;
     --cream: #eef1e4;
-    --muted: #9db097;
-    --muted-dim: #6f8069;
-    --good: #2f6b3a;
-    --good-bg: #dde8d5;
+    --muted: #9cbcae;
+    --muted-dim: #5f8676;
+    --good: #00422f;
+    --good-bg: #d5e6de;
     --bad: #9a4a26;
     --bad-bg: #ecdcce;
   }
@@ -30,8 +33,8 @@
   }
   body {
     background:
-      radial-gradient(ellipse 900px 600px at 78% 20%, #223522 0%, transparent 60%),
-      radial-gradient(ellipse 1200px 900px at 20% 90%, #162214 0%, transparent 55%),
+      radial-gradient(ellipse 900px 600px at 78% 20%, #00563d 0%, transparent 60%),
+      radial-gradient(ellipse 1200px 900px at 20% 90%, #003324 0%, transparent 55%),
       linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-1) 100%);
   }
 
@@ -190,7 +193,7 @@
   .subtext {
     font-size: 13.5px;
     letter-spacing: 0.5px;
-    color: #4a5c43;
+    color: #3d5a4e;
     line-height: 1.7;
     max-width: 480px;
     margin: 0 auto;
@@ -201,7 +204,7 @@
     display: block;
     width: 100%;
     margin-top: 26px;
-    background: var(--ink-dark);
+    background: var(--brand);
     color: var(--cream);
     border: none;
     font-family: 'JetBrains Mono', monospace;
@@ -219,7 +222,7 @@
     );
     transition: transform 0.08s ease, background 0.15s ease;
   }
-  .pixel-btn:hover:not(:disabled) { background: #29401f; }
+  .pixel-btn:hover:not(:disabled) { background: var(--brand-hover); }
   .pixel-btn:active:not(:disabled) { transform: translateY(1px); }
   .pixel-btn.blink { animation: blink 1.3s step-start infinite; }
   @keyframes blink { 50% { opacity: 0.55; } }
@@ -303,7 +306,7 @@
   .progress-dots { display: flex; gap: 8px; justify-content: center; margin-top: 26px; }
   .progress-dots span { width: 7px; height: 7px; background: #cfc9b2; }
   .progress-dots span.done { background: var(--ink-dark); }
-  .progress-dots span.active { background: var(--good); box-shadow: 0 0 0 3px rgba(47,107,58,0.18); }
+  .progress-dots span.active { background: var(--good); box-shadow: 0 0 0 3px rgba(0,66,47,0.18); }
 
   .score-line {
     font-size: 20px;
@@ -315,7 +318,7 @@
   }
   .score-detail {
     font-size: 12.5px;
-    color: #4a5c43;
+    color: #3d5a4e;
     letter-spacing: 1px;
     margin-bottom: 4px;
     text-transform: uppercase;
@@ -345,7 +348,7 @@
     letter-spacing: 0.5px;
   }
   .name-input:focus { outline: none; background: #fbfaf3; }
-  .name-input::placeholder { color: #9aa590; font-weight: 500; }
+  .name-input::placeholder { color: #93a89e; font-weight: 500; }
   .field-error {
     text-align: left;
     font-size: 11.5px;
@@ -406,8 +409,8 @@
     text-transform: none;
   }
   @keyframes shotPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(47,107,58,0); }
-    50%      { box-shadow: 0 0 0 4px rgba(47,107,58,0.25); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,66,47,0); }
+    50%      { box-shadow: 0 0 0 4px rgba(0,66,47,0.25); }
   }
   .leaderboard-row {
     display: flex;
@@ -445,63 +448,17 @@
   }
   .leaderboard-empty {
     font-size: 12px;
-    color: #6f8069;
+    color: #5f8676;
     letter-spacing: 0.5px;
   }
   .leaderboard-note {
     font-size: 10.5px;
-    color: #8a927f;
+    color: #7f8f87;
     letter-spacing: 0.3px;
     margin-top: 12px;
     text-transform: none;
   }
-
-  .tally-toggle {
-    display: inline-block;
-    margin-top: 14px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: var(--ink-dark);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    text-transform: uppercase;
-    padding: 0;
-  }
-  .tally-panel {
-    margin-top: 14px;
-    max-height: 220px;
-    overflow-y: auto;
-    border: 2px solid var(--ink-dark);
-    background: #fbf8ee;
-  }
-  .tally-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    font-size: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd7bf;
-  }
-  .tally-row:last-child { border-bottom: none; }
-  .tally-row.you { background: var(--good-bg); }
-  .tally-rank { width: 26px; flex-shrink: 0; font-weight: 700; color: #4a5c43; }
-  .tally-name {
-    flex: 1;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    color: var(--ink-dark);
-    text-transform: uppercase;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .tally-score { font-weight: 800; color: var(--good); }
+  .leaderboard-note.error { color: var(--bad); font-weight: 700; }
 
   .rank-line {
     margin-top: 12px;
@@ -516,31 +473,33 @@
   .rank-line.champ { color: var(--good); animation: rankPulse 0.7s ease-in-out 3; }
   @keyframes rankPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
-  .tally-count {
-    font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px;
-    color: #6f8069; padding: 8px 12px; text-transform: uppercase;
-    border-bottom: 1px solid #ddd7bf; text-align: left;
-  }
-
   #winflash {
     position: fixed; inset: 0; pointer-events: none; z-index: 50;
-    background: radial-gradient(circle at 50% 45%, rgba(120,200,120,0.35), transparent 60%);
+    background: radial-gradient(circle at 50% 45%, rgba(0,140,100,0.35), transparent 60%);
     opacity: 0;
   }
   #winflash.go { animation: flash 0.9s ease-out; }
   @keyframes flash { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
+
+  /* ---- credits ---- */
+  .credits {
+    position: absolute;
+    bottom: 12px; left: 0; right: 0;
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    z-index: 20;
+    padding: 0 16px;
+    line-height: 1.6;
+  }
+  .credits b { color: var(--cream); font-weight: 700; }
 </style>
 <!--
   ============================================================
   SHARED LEADERBOARD SETUP  (needed for GitHub Pages hosting)
-  The top-10 board is shared across ALL players via Firebase.
-  One-time setup (about 5 minutes):
-   1. Go to https://console.firebase.google.com  ->  Add project
-   2. Build > Realtime Database > Create Database  (start in TEST mode)
-   3. Project settings (gear) > General > Your apps > Web (</>) app
-      -> register app -> copy the firebaseConfig values
-   4. Paste those values into `firebaseConfig` in the <script> below
-   5. Realtime Database > Rules  ->  paste this and Publish:
+  Realtime Database > Rules  ->  paste this and Publish:
       {
         "rules": {
           "leaderboard": {
@@ -552,7 +511,6 @@
           }
         }
       }
-  That's it — commit index.html to GitHub Pages and all 60 players share one live top 10.
   ============================================================
 -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -655,7 +613,7 @@
           <div class="leaderboard-title">🏆 Leaderboard · Top 10</div>
           <ul class="leaderboard-list" id="leaderboard-list"></ul>
           <div class="rank-line" id="rank-line"></div>
-          <div class="leaderboard-note">Live leaderboard — the top 10 scorers across all players.</div>
+          <div class="leaderboard-note" id="leaderboard-note">Live leaderboard — the top 10 scorers across all players.</div>
         </div>
         <div class="shot-instruct">
           📸 TAKE A SCREENSHOT OF YOUR SCORE
@@ -672,15 +630,15 @@
   </div>
 
   <div class="cactus" style="left:88%;">
-    <svg viewBox="0 0 20 60"><rect x="8" y="0" width="4" height="60" fill="#6f8069"/><rect x="2" y="18" width="4" height="14" fill="#6f8069"/><rect x="14" y="10" width="4" height="20" fill="#6f8069"/></svg>
+    <svg viewBox="0 0 20 60"><rect x="8" y="0" width="4" height="60" fill="#5f8676"/><rect x="2" y="18" width="4" height="14" fill="#5f8676"/><rect x="14" y="10" width="4" height="20" fill="#5f8676"/></svg>
   </div>
   <div class="cactus" style="left:3%; width:12px; height:32px;">
-    <svg viewBox="0 0 14 36"><rect x="5" y="0" width="4" height="36" fill="#6f8069"/></svg>
+    <svg viewBox="0 0 14 36"><rect x="5" y="0" width="4" height="36" fill="#5f8676"/></svg>
   </div>
 
   <div id="dino">
     <svg viewBox="0 0 88 88" width="100%" height="100%" shape-rendering="crispEdges">
-      <g fill="#9db097">
+      <g fill="#9cbcae">
         <rect x="32" y="0"  width="20" height="4"/>
         <rect x="32" y="4"  width="24" height="4"/>
         <rect x="32" y="8"  width="28" height="4"/>
@@ -705,9 +663,14 @@
         <rect x="32" y="56" width="4" height="4"/>
         <rect x="28" y="60" width="12" height="4"/>
       </g>
-      <rect x="48" y="12" width="4" height="4" fill="#0c130d"/>
-      <rect x="56" y="12" width="4" height="4" fill="#0c130d"/>
+      <rect x="48" y="12" width="4" height="4" fill="#00140e"/>
+      <rect x="56" y="12" width="4" height="4" fill="#00140e"/>
     </svg>
+  </div>
+
+  <div class="credits">
+    Made exclusively for <b>Dx Labs: AI4UP Batch 2</b><br>
+    Office of the Vice President for Digital Transformation · University of the Philippines
   </div>
 
 </div>
@@ -771,32 +734,30 @@ let score = 0;
 let correctCount = 0;
 let playerName = '';
 const POINTS_PER_Q = 10;
-const LEADERBOARD_KEY = 'dxlabs-l1-leaderboard';
 
-// ===== FIREBASE CONFIG — paste your project's values here (see setup notes above) =====
+// ===== FIREBASE CONFIG =====
 const firebaseConfig = {
-  apiKey:            "AIzaSyCD5Qg3xKZo9pjUWytwfOm2dFpCaGqri6g",
-  authDomain:        "dx-labs-2026.firebaseapp.com",
-  databaseURL:       "https://dx-labs-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId:         "dx-labs-2026",
-  storageBucket:     "dx-labs-2026.firebasestorage.app",
-  messagingSenderId: "769296750965",
-  appId:             "1:769296750965:web:dbb3ae97b41f758ed99b3c",
-  measurementId:     "G-2C472MDFW3"
+  apiKey:            "AIzaSyArLlkCB5NWCcEX8i6K_E8Zm8UiE_u2Hag",
+  authDomain:        "dx-labs-game-1.firebaseapp.com",
+  databaseURL:       "https://dx-labs-game-1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:         "dx-labs-game-1",
+  storageBucket:     "dx-labs-game-1.firebasestorage.app",
+  messagingSenderId: "5843855340",
+  appId:             "1:5843855340:web:17bc55170d1bca2d2882c9",
+  measurementId:     "G-VQ0ZV5DPX4"
 };
-// =====================================================================================
+// ===========================
 
-let db = null, fbReady = false, localBoard = [];
+let db = null, fbReady = false, fbInitError = '';
 try {
-  const configured = firebaseConfig.databaseURL && firebaseConfig.databaseURL.indexOf('YOUR_PROJECT_ID') === -1;
-  if (configured && window.firebase) {
+  if (window.firebase) {
     firebase.initializeApp(firebaseConfig);
     db = firebase.database();
     fbReady = true;
   } else {
-    console.warn('Firebase not configured yet — leaderboard is LOCAL ONLY until you paste firebaseConfig.');
+    fbInitError = 'Firebase scripts did not load (blocked network or ad blocker).';
   }
-} catch (e) { console.error('Firebase init failed:', e); }
+} catch (e) { fbInitError = 'Firebase init failed: ' + e.message; console.error(e); }
 
 function dbKey(name) {
   return (name || '').trim().toLowerCase().replace(/[.#$\[\]\/]/g, '_').slice(0, 60) || 'player';
@@ -825,34 +786,26 @@ function beep({ freq = 440, duration = 0.09, type = 'square', vol = 0.15, delay 
 }
 function sfxClick() { beep({ freq: 320, duration: 0.05, type: 'square', vol: 0.1 }); }
 function sfxJump() { beep({ freq: 220, duration: 0.16, type: 'square', vol: 0.16, glideTo: 520 }); }
-function sfxCorrect() {
-  beep({ freq: 587, duration: 0.09, type: 'square', vol: 0.15, delay: 0 });
-  beep({ freq: 784, duration: 0.14, type: 'square', vol: 0.15, delay: 0.09 });
-}
-function sfxWrong() {
-  beep({ freq: 180, duration: 0.18, type: 'sawtooth', vol: 0.14, delay: 0, glideTo: 90 });
-}
+function sfxWrong() { beep({ freq: 180, duration: 0.18, type: 'sawtooth', vol: 0.14, delay: 0, glideTo: 90 }); }
 function sfxGameOver() {
   beep({ freq: 392, duration: 0.14, type: 'square', vol: 0.15, delay: 0 });
   beep({ freq: 330, duration: 0.14, type: 'square', vol: 0.15, delay: 0.14 });
   beep({ freq: 262, duration: 0.28, type: 'square', vol: 0.15, delay: 0.28 });
 }
-// ---- extra arcade SFX ----
-function sfxCoin() {            // classic "point!" pickup
+function sfxCoin() {
   beep({ freq: 988,  duration: 0.06, type: 'square', vol: 0.13 });
   beep({ freq: 1319, duration: 0.13, type: 'square', vol: 0.13, delay: 0.06 });
 }
 function sfxHover() { beep({ freq: 680, duration: 0.028, type: 'square', vol: 0.045 }); }
-function sfxSelect() { beep({ freq: 520, duration: 0.06, type: 'square', vol: 0.1, glideTo: 760 }); }
-function sfxStart() {           // little power-up run-up
+function sfxStart() {
   [392, 523, 659, 784].forEach((f, i) =>
     beep({ freq: f, duration: 0.08, type: 'square', vol: 0.13, delay: i * 0.07 }));
 }
-function sfxRankUp() {          // top-3 finish
+function sfxRankUp() {
   [523, 659, 784, 1047].forEach((f, i) =>
     beep({ freq: f, duration: 0.11, type: 'square', vol: 0.14, delay: i * 0.09 }));
 }
-function sfxFanfare() {         // new #1 victory jingle
+function sfxFanfare() {
   const seq = [[659,0.12],[659,0.12],[659,0.16],[523,0.12],[659,0.16],[784,0.30],[392,0.30]];
   let t = 0;
   seq.forEach(([f, d]) => { beep({ freq: f, duration: d, type: 'square', vol: 0.15, delay: t }); t += d * 0.92; });
@@ -883,16 +836,12 @@ function updateHud() {
 
 function jumpDino() {
   const dino = document.getElementById('dino');
-  dino.classList.remove('jump');
-  void dino.offsetWidth;
-  dino.classList.add('jump');
+  dino.classList.remove('jump'); void dino.offsetWidth; dino.classList.add('jump');
   sfxJump();
 }
 function shakeDino() {
   const dino = document.getElementById('dino');
-  dino.classList.remove('duck');
-  void dino.offsetWidth;
-  dino.classList.add('duck');
+  dino.classList.remove('duck'); void dino.offsetWidth; dino.classList.add('duck');
 }
 
 function renderProgress() {
@@ -931,7 +880,6 @@ function selectAnswer(idx) {
   const q = questions[current];
   const buttons = document.querySelectorAll('#q-choices .choice');
   buttons.forEach(b => b.disabled = true);
-
   const feedback = document.getElementById('q-feedback');
 
   if (idx === q.correct) {
@@ -954,34 +902,20 @@ function selectAnswer(idx) {
 
   setTimeout(() => {
     current += 1;
-    if (current < questions.length) {
-      renderQuestion();
-    } else {
-      endGame();
-    }
+    if (current < questions.length) renderQuestion();
+    else endGame();
   }, 1400);
 }
 
-async function loadLeaderboard() {
-  if (!fbReady) return localBoard.slice();
-  try {
-    const snap = await db.ref('leaderboard').once('value');
-    const val = snap.val() || {};
-    return Object.keys(val).map(k => val[k]).filter(e => e && typeof e.score === 'number');
-  } catch (err) {
-    console.error('Leaderboard load error:', err);
-    return localBoard.slice();
-  }
+function toList(val) {
+  return Object.keys(val || {}).map(k => val[k]).filter(e => e && typeof e.score === 'number');
 }
 
 function renderLeaderboard(list) {
   const el = document.getElementById('leaderboard-list');
   el.innerHTML = '';
   if (!list || list.length === 0) {
-    const li = document.createElement('li');
-    li.className = 'leaderboard-empty';
-    li.textContent = 'No scores yet.';
-    el.appendChild(li);
+    el.innerHTML = '<li class="leaderboard-empty">No scores yet.</li>';
     return;
   }
   const medals = ['🥇', '🥈', '🥉'];
@@ -1005,83 +939,76 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-let latestEntryAt = null;
-let fullLeaderboardCache = [];
-
-function renderTally(list) {
-  /* removed — leaderboard now shows Top 10 only */
-}
-
-const MAX_ENTRIES = 300;   // comfortably holds ~60+ players
-
 function nameKey(n) { return (n || '').trim().toLowerCase(); }
+
+function setNote(text, isError) {
+  const n = document.getElementById('leaderboard-note');
+  n.textContent = text;
+  n.classList.toggle('error', !!isError);
+}
 
 async function endGame() {
   showScreen('over');
   updateHud();
   document.getElementById('final-score').textContent = `Final Score: ${score}`;
   document.getElementById('final-detail').textContent = `${correctCount} / ${questions.length} correct`;
-
-  const listEl = document.getElementById('leaderboard-list');
-  listEl.innerHTML = '<li class="leaderboard-empty">Saving score…</li>';
+  document.getElementById('leaderboard-list').innerHTML = '<li class="leaderboard-empty">Saving score…</li>';
+  setNote('Live leaderboard — the top 10 scorers across all players.', false);
   const at = Date.now();
-  latestEntryAt = at;
+  const mine = [{ name: playerName, score, at }];
+
+  if (!fbReady) {
+    setNote('⚠ Leaderboard offline — ' + fbInitError, true);
+    finishBoard(mine);
+    return;
+  }
 
   try {
-    if (fbReady) {
-      // one record per player; transaction keeps their BEST score even with 60 people writing at once
-      const ref = db.ref('leaderboard/' + dbKey(playerName));
-      await ref.transaction(cur => {
-        if (cur && typeof cur.score === 'number' && cur.score >= score) return cur;
-        return { name: playerName, score: score, at: at };
-      });
-      const list = await loadLeaderboard();
-      fullLeaderboardCache = list;
-      finishBoard(list);
-      subscribeBoard();               // keep everyone's board live
-    } else {
-      const key = nameKey(playerName);
-      const ex = localBoard.find(e => nameKey(e.name) === key);
-      if (ex) { if (score > ex.score) { ex.score = score; ex.at = at; } }
-      else localBoard.push({ name: playerName, score, at });
-      fullLeaderboardCache = localBoard.slice();
-      finishBoard(fullLeaderboardCache);
-    }
+    // one record per player; keeps their BEST score
+    await db.ref('leaderboard/' + dbKey(playerName)).transaction(cur => {
+      if (cur && typeof cur.score === 'number' && cur.score >= score) return cur;
+      return { name: playerName, score: score, at: at };
+    });
   } catch (err) {
-    console.error('Leaderboard error:', err);
-    fullLeaderboardCache = [{ name: playerName, score, at }];
-    finishBoard(fullLeaderboardCache);
+    console.error('Save failed:', err);
+    setNote('⚠ Could not save your score (' + (err.code || err.message) + '). Check Firebase rules.', true);
+  }
+
+  try {
+    const snap = await db.ref('leaderboard').once('value');
+    finishBoard(toList(snap.val()));
+    subscribeBoard();
+  } catch (err) {
+    console.error('Load failed:', err);
+    setNote('⚠ Could not load the leaderboard (' + (err.code || err.message) + '). Check Firebase rules.', true);
+    finishBoard(mine);
   }
 }
 
-// live updates: re-render the top 10 for everyone whenever any player scores
+// live updates: re-render the top 10 whenever any player scores
 function subscribeBoard() {
-  if (!fbReady) return;
   db.ref('leaderboard').on('value', snap => {
-    const val = snap.val() || {};
-    const arr = Object.keys(val).map(k => val[k]).filter(e => e && typeof e.score === 'number');
-    fullLeaderboardCache = arr;
+    const arr = toList(snap.val());
     renderLeaderboard(arr);
     updateRankLine(arr);
+  }, err => {
+    setNote('⚠ Live updates stopped (' + (err.code || err.message) + ').', true);
   });
 }
 
 function updateRankLine(list) {
   const ranked = [...list].sort((a, b) => b.score - a.score || a.at - b.at);
-  const key = nameKey(playerName);
-  const myRank = ranked.findIndex(e => nameKey(e.name) === key) + 1;
+  const myRank = ranked.findIndex(e => nameKey(e.name) === nameKey(playerName)) + 1;
   const total = ranked.length;
   const el = document.getElementById('rank-line');
-  if (el) {
-    el.classList.remove('champ');
-    if (myRank === 1) {
-      el.textContent = `🏆 NEW #1 — top of ${total} player${total !== 1 ? 's' : ''}!`;
-      el.classList.add('champ');
-    } else if (myRank > 0) {
-      el.innerHTML = `You placed <b>#${myRank}</b> of ${total} player${total !== 1 ? 's' : ''}`;
-    } else {
-      el.textContent = '';
-    }
+  el.classList.remove('champ');
+  if (myRank === 1) {
+    el.textContent = `🏆 NEW #1 — top of ${total} player${total !== 1 ? 's' : ''}!`;
+    el.classList.add('champ');
+  } else if (myRank > 0) {
+    el.innerHTML = `You placed <b>#${myRank}</b> of ${total} player${total !== 1 ? 's' : ''}`;
+  } else {
+    el.textContent = '';
   }
   return { myRank, total };
 }
@@ -1096,7 +1023,6 @@ function finishBoard(list) {
 
 function celebrate() {
   const f = document.getElementById('winflash');
-  if (!f) return;
   f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
 }
 
@@ -1128,7 +1054,6 @@ document.getElementById('btn-begin').addEventListener('click', () => {
   renderQuestion();
 });
 
-// arcade hover blips on all main buttons
 document.querySelectorAll('.pixel-btn').forEach(b =>
   b.addEventListener('mouseenter', () => sfxHover()));
 document.getElementById('btn-restart').addEventListener('click', () => {
