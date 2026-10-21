@@ -29,7 +29,7 @@
     margin: 0; padding: 0; height: 100%;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     color: var(--cream);
-    overflow: hidden;
+    overflow-x: hidden;
   }
   body {
     background:
@@ -41,13 +41,12 @@
   #stage {
     position: relative;
     width: 100%;
-    height: 100vh;
-    min-height: 520px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4vh 4vw;
+    padding: 6vh 4vw 70px 4vw;
   }
 
   /* ---- decorative pixel scene, tinted for dark bg ---- */
@@ -412,6 +411,89 @@
     0%, 100% { box-shadow: 0 0 0 0 rgba(0,66,47,0); }
     50%      { box-shadow: 0 0 0 4px rgba(0,66,47,0.25); }
   }
+  /* ---- top 3 podium ---- */
+  body { background-attachment: fixed; }
+  /* ---- confetti + congrats pop ---- */
+  #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
+  #congrats {
+    position: fixed; left: 50%; top: 38%;
+    transform: translate(-50%, -50%) scale(0.3);
+    z-index: 61; pointer-events: none; opacity: 0;
+    background: var(--brand); color: var(--cream);
+    border: 4px solid #e3c454;
+    padding: 18px 26px; text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(14px, 3vw, 24px); line-height: 1.5;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.35);
+    clip-path: polygon(0 8px, 8px 8px, 8px 0, calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px));
+    white-space: nowrap;
+  }
+  #congrats small {
+    display: block; margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; color: #bfe3d2;
+  }
+  #congrats.show { animation: congratsPop 2.6s ease forwards; }
+  @keyframes congratsPop {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(-4deg); }
+    12%  { opacity: 1; transform: translate(-50%, -50%) scale(1.12) rotate(2deg); }
+    20%  { transform: translate(-50%, -50%) scale(1) rotate(0); }
+    80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -60%) scale(0.9); }
+  }
+
+  .podium {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    align-items: end;
+    gap: 6px;
+    margin: 6px auto 18px auto;
+    max-width: 460px;
+  }
+  .podium-slot { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+  .podium-name {
+    width: 100%;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    color: var(--ink-dark);
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    min-height: 2.6em;
+    display: flex; align-items: flex-end; justify-content: center;
+    text-align: center;
+    word-break: break-word;
+  }
+  .podium-score {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--cream);
+    background: var(--brand);
+    padding: 2px 8px;
+    margin-bottom: 6px;
+  }
+  .podium-block {
+    width: 100%;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(18px, 4vw, 26px);
+    color: var(--cream);
+    background: var(--brand);
+    border-top: 6px solid var(--accent, #c9b458);
+    box-shadow: inset -6px 0 0 rgba(0,0,0,0.18);
+    clip-path: polygon(0 6px, 6px 6px, 6px 0, calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px, 100% 100%, 0 100%);
+  }
+  .p1 .podium-block { height: 112px; --accent: #e3c454; background: #00563d; }
+  .p2 .podium-block { height: 82px;  --accent: #c7cfcb; }
+  .p3 .podium-block { height: 62px;  --accent: #b9773f; }
+  .podium-slot.empty .podium-block { opacity: 0.35; }
+  .podium-slot.you .podium-name { color: var(--good); text-decoration: underline; text-underline-offset: 3px; }
+  .podium-trophy { width: 34px; height: 34px; margin-bottom: 4px; }
+  .p1 .podium-trophy { animation: trophyBob 1.6s ease-in-out infinite; }
+  @keyframes trophyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
   .leaderboard-row {
     display: flex;
     align-items: center;
@@ -481,6 +563,26 @@
   #winflash.go { animation: flash 0.9s ease-out; }
   @keyframes flash { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
 
+  .badge-note {
+    margin: 12px auto 0 auto;
+    max-width: 440px;
+    padding: 10px 14px;
+    border: 2px dashed var(--ink-dark);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.4px;
+    color: var(--ink-dark);
+    text-transform: uppercase;
+  }
+  .badge-note span {
+    display: block;
+    font-weight: 500;
+    text-transform: none;
+    color: #3d5a4e;
+    margin-top: 2px;
+  }
+
   .end-image {
     display: block;
     width: min(260px, 70%);
@@ -493,8 +595,8 @@
 
   /* ---- credits ---- */
   .credits {
-    position: absolute;
-    bottom: 12px; left: 0; right: 0;
+    position: relative;
+    margin-top: 28px;
     text-align: center;
     font-size: 10.5px;
     letter-spacing: 1.5px;
@@ -529,6 +631,8 @@
 <body>
 
 <div id="winflash"></div>
+<canvas id="confetti"></canvas>
+<div id="congrats">🎉 Congratulations! 🎉<small id="congrats-sub">Challenge complete · Badge unlocked!</small></div>
 
 <div id="stage">
 
@@ -580,7 +684,7 @@
       <div class="card-inner">
         <div class="card-tag">Rules</div>
         <div class="howbox">Multiple<br>Choice</div>
-        <div class="subtext">Pick the answer that makes the most sense.<br><br>Each correct answer is worth 10 points.</div>
+        <div class="subtext">Pick the answer that makes the most sense.<br><br>The leaderboard ranks players by number of correct answers.</div>
         <button class="pixel-btn" id="btn-ready">▶ Continue</button>
       </div>
     </div>
@@ -593,7 +697,7 @@
     <div class="card-outer">
       <div class="card-inner">
         <div class="card-tag">Go</div>
-        <div class="subtext" style="margin-bottom:22px;">Five questions. Ten points each.<br>Let's calibrate the thinker.</div>
+        <div class="subtext" style="margin-bottom:22px;">Five questions. One chance.<br>Let's calibrate the thinker.</div>
         <button class="pixel-btn blink" id="btn-begin">▶ Begin Run</button>
       </div>
     </div>
@@ -620,18 +724,17 @@
     <div class="card-outer">
       <div class="card-inner">
         <div class="card-tag">Results</div>
-        <div class="score-line" id="final-score"></div>
-        <div class="score-detail" id="final-detail"></div>
-        <img class="end-image hidden" id="end-image" alt="Dx Labs activity">
+        <img class="end-image hidden" id="end-image" alt="The Thinker badge">
+        <div class="badge-note hidden" id="badge-note">
+          🏅 Badge unlocked: The Thinker
+          <span>Collect a badge from every game — complete the set for a surprise at the onsite workshop!</span>
+        </div>
         <div class="leaderboard">
-          <div class="leaderboard-title">🏆 Leaderboard · Top 10</div>
+          <div class="leaderboard-title">🏆 Leaderboard</div>
+          <div class="podium hidden" id="podium"></div>
           <ul class="leaderboard-list" id="leaderboard-list"></ul>
           <div class="rank-line" id="rank-line"></div>
-          <div class="leaderboard-note" id="leaderboard-note">Live leaderboard — the top 10 scorers across all players.</div>
-        </div>
-        <div class="shot-instruct">
-          📸 TAKE A SCREENSHOT OF YOUR SCORE
-          <span>You will need to send this to us.</span>
+          <div class="leaderboard-note" id="leaderboard-note">Live leaderboard — top 10 players by correct answers.</div>
         </div>
         <button class="pixel-btn" id="btn-restart">↺ Back to Start</button>
       </div>
@@ -881,7 +984,7 @@ function updateHud() {
     hud.textContent = '';
     return;
   }
-  hud.innerHTML = `SCORE <span class="num">${score}</span> &nbsp;·&nbsp; Q <span class="num">${Math.min(current+1, questions.length)}</span>/${questions.length}`;
+  hud.innerHTML = `Q <span class="num">${Math.min(current+1, questions.length)}</span>/${questions.length}`;
 }
 
 function jumpDino() {
@@ -934,7 +1037,7 @@ function selectAnswer(idx) {
 
   if (idx === q.correct) {
     buttons[idx].classList.add('correct');
-    feedback.textContent = 'Correct · +10';
+    feedback.textContent = 'Correct';
     feedback.classList.add('good');
     score += POINTS_PER_Q;
     correctCount += 1;
@@ -961,23 +1064,49 @@ function toList(val) {
   return Object.keys(val || {}).map(k => Object.assign({ key: k }, val[k])).filter(e => e && typeof e.score === 'number');
 }
 
+const TROPHY_SVG = `<svg class="podium-trophy" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <rect x="3" y="1" width="10" height="2" fill="#e3c454"/><rect x="4" y="3" width="8" height="4" fill="#e3c454"/>
+  <rect x="1" y="2" width="2" height="3" fill="#c9a43a"/><rect x="13" y="2" width="2" height="3" fill="#c9a43a"/>
+  <rect x="2" y="5" width="2" height="1" fill="#c9a43a"/><rect x="12" y="5" width="2" height="1" fill="#c9a43a"/>
+  <rect x="5" y="7" width="6" height="2" fill="#e3c454"/><rect x="7" y="9" width="2" height="2" fill="#c9a43a"/>
+  <rect x="5" y="11" width="6" height="1" fill="#c9a43a"/><rect x="4" y="12" width="8" height="2" fill="#00422f"/>
+  <rect x="5" y="3" width="1" height="3" fill="#fff6c8"/></svg>`;
+
+function fmtScore(e) { return `${Math.round(e.score / POINTS_PER_Q)}/${questions.length}`; }
+
 function renderLeaderboard(list) {
   const el = document.getElementById('leaderboard-list');
+  const pod = document.getElementById('podium');
   el.innerHTML = '';
   if (!list || list.length === 0) {
+    pod.classList.add('hidden');
     el.innerHTML = '<li class="leaderboard-empty">No scores yet.</li>';
     return;
   }
-  const medals = ['🥇', '🥈', '🥉'];
-  const top10 = [...list].sort((a, b) => b.score - a.score || a.at - b.at).slice(0, 10);
-  top10.forEach((entry, i) => {
+  const ranked = [...list].sort((a, b) => b.score - a.score || a.at - b.at);
+
+  // podium: display order 2 · 1 · 3
+  pod.innerHTML = [[1, 'p2'], [0, 'p1'], [2, 'p3']].map(([i, cls]) => {
+    const e = ranked[i];
+    const you = e && e.key === playerCode ? ' you' : '';
+    return `<div class="podium-slot ${cls}${e ? you : ' empty'}">
+      ${i === 0 ? TROPHY_SVG : ''}
+      <div class="podium-name">${e ? escapeHtml(e.name) : '—'}</div>
+      ${e ? `<div class="podium-score">${fmtScore(e)}</div>` : ''}
+      <div class="podium-block">${i + 1}</div>
+    </div>`;
+  }).join('');
+  pod.classList.remove('hidden');
+
+  // list: ranks 4–10
+  ranked.slice(3, 10).forEach((entry, k) => {
     const li = document.createElement('li');
     li.className = 'leaderboard-row';
     if (entry.key === playerCode) li.classList.add('you');
     li.innerHTML = `
-      <span class="leaderboard-rank">${medals[i] || (i + 1) + '.'}</span>
+      <span class="leaderboard-rank">${k + 4}.</span>
       <span class="leaderboard-name">${escapeHtml(entry.name)}</span>
-      <span class="leaderboard-score">${entry.score}</span>
+      <span class="leaderboard-score">${fmtScore(entry)}</span>
     `;
     el.appendChild(li);
   });
@@ -1000,14 +1129,13 @@ function setNote(text, isError) {
 async function endGame() {
   showScreen('over');
   updateHud();
-  document.getElementById('final-score').textContent = `Final Score: ${score}`;
-  document.getElementById('final-detail').textContent = `${correctCount} / ${questions.length} correct`;
   document.getElementById('leaderboard-list').innerHTML = '<li class="leaderboard-empty">Saving score…</li>';
   setNote('Live leaderboard — the top 10 scorers across all players.', false);
   sendToSheets();
+  partyPop();
   const img = document.getElementById('end-image');
   if (END_IMAGE_URL) {
-    img.onload = () => img.classList.remove('hidden');
+    img.onload = () => { img.classList.remove('hidden'); document.getElementById('badge-note').classList.remove('hidden'); };
     img.onerror = () => img.classList.add('hidden');
     img.src = END_IMAGE_URL;
   }
@@ -1077,6 +1205,49 @@ function finishBoard(list) {
   else { sfxGameOver(); }
 }
 
+function partyPop() {
+  const cv = document.getElementById('confetti');
+  const ctx = cv.getContext('2d');
+  const W = cv.width = window.innerWidth, H = cv.height = window.innerHeight;
+  const colors = ['#00422f', '#00694a', '#2fa36f', '#7fd1a8', '#e3c454', '#f1ecdd'];
+  const parts = [];
+  // two poppers firing from the bottom corners + a burst from the centre
+  [[0, H, -1], [W, H, 1]].forEach(([x, y, dir]) => {
+    for (let i = 0; i < 90; i++) {
+      const a = (-Math.PI / 2) + (dir * -0.35) + (Math.random() - 0.5) * 0.9;
+      const v = 11 + Math.random() * 9;
+      parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        s: 5 + Math.random() * 6, c: colors[i % colors.length], r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4, sq: Math.random() < 0.5 });
+    }
+  });
+  for (let i = 0; i < 60; i++) {
+    const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 7;
+    parts.push({ x: W / 2, y: H * 0.38, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 3,
+      s: 4 + Math.random() * 5, c: colors[i % colors.length], r: 0, vr: (Math.random() - 0.5) * 0.4, sq: true });
+  }
+  const start = performance.now();
+  (function frame(t) {
+    const life = (t - start) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    parts.forEach(p => {
+      p.vy += 0.32; p.vx *= 0.99; p.vy *= 0.99;
+      p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, 1 - Math.max(0, life - 2.2) / 1.2);
+      ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+      if (p.sq) ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s);          // pixel squares
+      else ctx.fillRect(-p.s / 2, -p.s / 5, p.s, p.s / 2.5);           // ribbons
+      ctx.restore();
+    });
+    if (life < 3.4) requestAnimationFrame(frame); else ctx.clearRect(0, 0, W, H);
+  })(start);
+
+  const pop = document.getElementById('congrats');
+  pop.classList.remove('show'); void pop.offsetWidth; pop.classList.add('show');
+  [523, 659, 784, 1047, 1319].forEach((f, i) =>
+    beep({ freq: f, duration: 0.07, type: 'square', vol: 0.1, delay: 0.05 + i * 0.05 }));
+}
+
 function celebrate() {
   const f = document.getElementById('winflash');
   f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
@@ -1104,7 +1275,7 @@ document.getElementById('btn-name-continue').addEventListener('click', async () 
     if (a.exists()) {
       const v = a.val();
       return fail(v.status === 'done'
-        ? `You already took this quiz. Recorded score: ${v.score}.`
+        ? `You already took this quiz (${Math.round((v.score || 0) / POINTS_PER_Q)}/${questions.length} correct).`
         : 'This code was already used to start the quiz.');
     }
     playerName = official;
